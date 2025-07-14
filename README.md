@@ -77,7 +77,7 @@ npm run dev
 
 ## 📌 Author 
 
-Name: Ximena Guerrero Villa
-Clan: Lovelace
-Email: xguerrerov0903@gmail.com
-ID: 1000896809
+-Name: Ximena Guerrero Villa
+-Clan: Lovelace
+-Email: xguerrerov0903@gmail.com
+-ID: 1000896809
