@@ -11,17 +11,20 @@ export async function loadMyEvents() {
   setupUserTableListener();
 }
 
-loadMyEvents(); // 👈 ejecuta la función
+loadMyEvents(); // Call the function to load events on page load
 
+// Function to print the user's events
 function printMyEvents(events, enrolls) {
   let myeventsContainer = document.getElementById("myEventsTableBody");
   myeventsContainer.innerHTML = "";
   const currentUser = JSON.parse(localStorage.getItem("user"));
 
-  // Filtrar las inscripciones del usuario actual
-  const myEnrollments = enrolls.filter((enroll) => enroll.userId == currentUser.id);
+  // Filter enrollments for the current user
+  const myEnrollments = enrolls.filter(
+    (enroll) => enroll.userId == currentUser.id
+  );
 
-  // Recorremos las inscripciones, no los cursos directamente
+  // Iterate through the enrollments and find the corresponding events
   myEnrollments.forEach((enroll) => {
     const event = events.find((c) => c.id == enroll.eventId);
     if (event) {
@@ -38,12 +41,11 @@ function printMyEvents(events, enrolls) {
   });
 }
 
-
 // Hear the event submit (button) of the form
 function setupUserTableListener() {
   const tbody = document.getElementById("myEventsTableBody");
 
-  // Evita múltiples escuchas: clona el nodo y lo reemplaza (elimina listeners)
+  // Avoid multiple listeners: clone the node and replace it (removes listeners)
   const newTbody = tbody.cloneNode(true);
   tbody.parentNode.replaceChild(newTbody, tbody);
 
@@ -51,15 +53,28 @@ function setupUserTableListener() {
     event.preventDefault();
     if (event.target.tagName !== "BUTTON") return;
     const tr = event.target.closest("tr");
-    const id = tr.id;
+    const enrollId = tr.id;
     const action = event.target.value;
+    // Check if the action is delete
     if (action === "delete") {
-      await deletes(urlEnroll, id); 
-      const updatedevents = await get(url);
+
+      // Get the enrollment by ID
+      const enroll = await get_id(urlEnroll, enrollId);
+      const eventId = enroll.eventId;
+      // 1. Delete the enrollment
+      await deletes(urlEnroll, enrollId);
+      // 2. Update the event capacity
+      const eventObj = await get_id(url, eventId);
+      const updatedEvent = {
+        ...eventObj,
+        capacity: Number(eventObj.capacity) + 1,
+      };
+      await update(url, eventId, updatedEvent);
+      alert("Enrollment deleted successfully");
+
+      const updatedEvents = await get(url);
       const updatedEnrolls = await get(urlEnroll);
-      printMyEvents(updatedevents, updatedEnrolls);
-    } 
+      printMyEvents(updatedEvents, updatedEnrolls);
+    }
   });
 }
-
-

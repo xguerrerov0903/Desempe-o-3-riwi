@@ -1,5 +1,6 @@
 // Main script to handle SPA routing and logic.
 
+// Define the routes for the application
 const routes = {
   "/": "/events.html",
   "/login": "/login.html",
@@ -9,31 +10,26 @@ const routes = {
   "/events/create": "/events/create.html",
 };
 
+// Function to handle navigation and load the appropriate content
 document.body.addEventListener("click", (e) => {
   if (e.target.matches("[data-link]")) {
     e.preventDefault();
     navigate(e.target.getAttribute("href"));
-  } else if (e.target.tagName !== "BUTTON") {
-    console.log("hi");
-    const action = e.target.value;
-    if (action == "logOut") {
-      console.log("Boton");
-      handleLogout();
-    }
-  }
+  } 
 });
 
+// Handle logout button click
 const logoutButton = document.getElementById("logoutButton");
 
+// Event listener of the logout button
 logoutButton.addEventListener("click", function () {
-  console.log("h");
-  // Perform logout actions here. For example:
-  // 1. Clear session data (e.g., localStorage, cookies)
-  // 2. Redirect to the login page
-  localStorage.removeItem("user"); // Example: Removing a token
-  window.location.href = "/login"; // Redirect to login page
+  // Clear user data from localStorage and redirect to login page
+  localStorage.removeItem("user"); 
+  window.location.href = "/login"; 
 });
 
+
+// Function to navigate to a specific path and load the corresponding content
 async function navigate(pathname) {
   const route = routes[pathname];
   const html = await fetch(route).then((res) => res.text());
@@ -97,13 +93,11 @@ async function navigate(pathname) {
   }
 }
 
+// Handle back/forward navigation
 window.addEventListener("popstate", () => navigate(location.pathname));
 
 document.addEventListener("DOMContentLoaded", () => {
   navigate(location.pathname);
 });
 
-function handleLogout() {
-  localStorage.removeItem("user");
-  location.reload();
-}
+

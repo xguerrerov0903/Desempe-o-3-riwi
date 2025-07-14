@@ -1,12 +1,14 @@
 // Handles login form functionality and validation.
 import { get } from "./api.js";
 
+// Initializes the login functionality by setting up event listeners
 export function initLogin() {
+  // Check if the user is already logged in
   const loginDiv = document.querySelector(".login");
   const containerDiv = document.querySelector(".container");
   const storedUser = JSON.parse(localStorage.getItem("user"));
 
-
+  // If user is logged in (in the localStorage is the info), redirect to events page
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
     loginForm.addEventListener("submit", handleLogin);
@@ -18,22 +20,28 @@ export function initLogin() {
   }
 }
 
-// El evento enviado es el submit del form
+// Handles user logout functionality
 async function handleLogin(e) {
   e.preventDefault();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
 
   try {
+    // Fetch users from the API to validate login credentials
     const users = await get("http://localhost:3000/users");
-    const user = users.find(u => u.email === email && u.password === password);
+    const user = users.find(
+      (u) => u.email === email && u.password === password
+    );
 
+    // If user is found, store user info in localStorage and redirect to events page
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
       window.location.href = "/events";
 
+      // If no user is found, display an error message
     } else {
-      document.getElementById("loginError").textContent = "Wrong email or password";
+      document.getElementById("loginError").textContent =
+        "Wrong email or password";
       document.getElementById("loginError").style.display = "block";
     }
   } catch (err) {
@@ -42,12 +50,14 @@ async function handleLogin(e) {
     document.getElementById("loginError").style.display = "block";
   }
 }
+// Handles user logout functionality
 export function showUserName(user) {
-  if (!user) return; 
+  if (!user) return;
   const userInfo = document.querySelector(".userName");
   if (userInfo) userInfo.textContent = user.name;
 }
 
+// Handles user permissions based on their role
 export function controlPermissions(user) {
   const eventCreate = document.querySelector('a[href="/events/create"]');
   const loginDisplay = document.querySelector('a[href="/login"]');
@@ -67,4 +77,3 @@ export function controlPermissions(user) {
     if (logOutDisplay) logOutDisplay.style.display = "none";
   }
 }
-

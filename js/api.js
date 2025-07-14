@@ -1,3 +1,6 @@
+// api.js
+// This module provides functions to interact with the API for CRUD operations.
+
 export async function get(url) {
   try {
     const response = await fetch(url);
