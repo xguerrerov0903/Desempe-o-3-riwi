@@ -9,12 +9,12 @@ export async function loadEvents() {
   setupUserTableListener();
 }
 
-loadEvents(); 
+loadEvents();
 
 function printEvents(eventss) {
   let eventsContainer = document.getElementById("eventsTableBody");
   eventsContainer.innerHTML = "";
-  //const currentUser = JSON.parse(localStorage.getItem("user"));
+  const currentUser = JSON.parse(localStorage.getItem("user"));
   eventss.forEach((event) => {
     eventsContainer.innerHTML += `
         <tr id="${event.id}">
@@ -22,20 +22,16 @@ function printEvents(eventss) {
             <td>${event.description}</td>
             <td>${event.capacity}</td>
             <td>${event.date}</td>
-            <td><button type="button" value="edit">Edit</button>
-                <button type="button" value="delete">Delet</button>
-         
-            </td>
-        </tr>`;
-  });
-}
-
-/*   ${
+            <td>${
               currentUser && currentUser.admin
                 ? `<button type="button" value="edit">Edit</button>
                     <button type="button" value="delete">Delet</button>`
                 : `<button type="button" value="enroll">Enroll</button>`
-            }*/
+            }
+            </td>
+        </tr>`;
+  });
+}
 
 // Hear the event submit (button) of the form
 function setupUserTableListener() {
@@ -45,9 +41,9 @@ function setupUserTableListener() {
   const newTbody = tbody.cloneNode(true);
   tbody.parentNode.replaceChild(newTbody, tbody);
 
-  //const currentUser = JSON.parse(localStorage.getItem("user"));
+  const currentUser = JSON.parse(localStorage.getItem("user"));
 
-  //if (currentUser && currentUser.admin) {
+  if (currentUser && currentUser.admin) {
     newTbody.addEventListener("click", async function (event) {
       event.preventDefault();
       if (event.target.tagName !== "BUTTON") return;
@@ -57,15 +53,16 @@ function setupUserTableListener() {
       if (action === "delete") {
         // 1. Elimina inscripciones del curso
         const enrollments = await get("http://localhost:3000/enrollments");
-        const relatedEnrollments = enrollments.filter(enroll => enroll.eventId == id);
+        const relatedEnrollments = enrollments.filter(
+          (enroll) => enroll.eventId == id
+        );
         for (const enroll of relatedEnrollments) {
-            await deletes("http://localhost:3000/enrollments", enroll.id);
+          await deletes("http://localhost:3000/enrollments", enroll.id);
         }
         // 2. Delet curse
         await deletes(url, id);
-        const updateEvent = await get(url)   
-        printEvents(updateEvent)    
-
+        const updateEvent = await get(url);
+        printEvents(updateEvent);
       } else if (action === "edit") {
         editEvent(id);
       } else if (action === "save-event") {
@@ -79,14 +76,14 @@ function setupUserTableListener() {
           date: inputs[3].value,
         };
         await update(url, id, updatedevent);
-        const updateEvent = await get(url)   
-        printEvents(updateEvent)    
+        const updateEvent = await get(url);
+        printEvents(updateEvent);
       } else {
-        const updateEvent = await get(url)   
-        printEvents(updateEvent)    
+        const updateEvent = await get(url);
+        printEvents(updateEvent);
       }
     });
-  /*} else {
+  } else {
     newTbody.addEventListener("click", async function (event) {
       event.preventDefault();
       if (event.target.tagName !== "BUTTON") return;
@@ -94,10 +91,11 @@ function setupUserTableListener() {
       const id = tr.id;
       const action = event.target.value;
       if (action === "enroll") {
+        console.log("hi")
         await addEvent(id, currentUser);
       }
     });
-  }*/
+  }
 }
 
 async function editEvent(id) {

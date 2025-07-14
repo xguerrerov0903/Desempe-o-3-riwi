@@ -31,12 +31,7 @@
   ],
   "enrollments": [
     {
-      "id": 1,
-      "userId": "2",
-      "eventId": "1"
-    },
-    {
-      "id": 4,
+      "id": "4",
       "userId": "5",
       "eventId": "3"
     }

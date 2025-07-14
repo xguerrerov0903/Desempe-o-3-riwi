@@ -11,7 +11,7 @@ export async function loadMyEvents() {
   setupUserTableListener();
 }
 
-loadMyevents(); // 👈 ejecuta la función
+loadMyEvents(); // 👈 ejecuta la función
 
 function printMyEvents(events, enrolls) {
   let myeventsContainer = document.getElementById("myEventsTableBody");
@@ -57,7 +57,7 @@ function setupUserTableListener() {
       await deletes(urlEnroll, id); // ❗ Cuidado: debes borrar en `enrollments`, no en `events`
       const updatedevents = await get(url);
       const updatedEnrolls = await get(urlEnroll);
-      printMyevents(updatedevents, updatedEnrolls);
+      printMyEvents(updatedevents, updatedEnrolls);
     } 
   });
 }

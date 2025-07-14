@@ -13,7 +13,25 @@ document.body.addEventListener("click", (e) => {
   if (e.target.matches("[data-link]")) {
     e.preventDefault();
     navigate(e.target.getAttribute("href"));
+  } else if (e.target.tagName !== "BUTTON") {
+    console.log("hi");
+    const action = e.target.value;
+    if (action == "logOut") {
+      console.log("Boton");
+      handleLogout();
+    }
   }
+});
+
+const logoutButton = document.getElementById("logoutButton");
+
+logoutButton.addEventListener("click", function () {
+  console.log("h");
+  // Perform logout actions here. For example:
+  // 1. Clear session data (e.g., localStorage, cookies)
+  // 2. Redirect to the login page
+  localStorage.removeItem("user"); // Example: Removing a token
+  window.location.href = "/login"; // Redirect to login page
 });
 
 async function navigate(pathname) {
@@ -34,20 +52,22 @@ async function navigate(pathname) {
     });
   }
 
-  if (pathname === "/login") {
-    if (user) {
-      alert("You already log in");
-      return navigate("/events");
+
+    if (pathname === "/login") {
+      if (user) {
+        alert("You already log in");
+        return navigate("/events");
+      }
+      import("./js/login.js").then((module) => module.initLogin());
     }
-    import("./js/login.js");
-  }
+  
 
   if (pathname === "/register") {
     if (user) {
       alert("You already register");
       return navigate("/events");
     }
-    import("./js/register.js");
+    import("./js/register.js").then((module) => module.initRegister());
   }
 
   if (pathname === "/enrollsment") {
@@ -62,9 +82,9 @@ async function navigate(pathname) {
   }
 
   if (pathname === "/events/create") {
-    if (!user.admin){
-        alert("Only admins can see this section");
-        return navigate("/events");
+    if (!user.admin) {
+      alert("Only admins can see this section");
+      return navigate("/events");
     }
     import("./js/create.js");
   }
@@ -75,3 +95,8 @@ window.addEventListener("popstate", () => navigate(location.pathname));
 document.addEventListener("DOMContentLoaded", () => {
   navigate(location.pathname);
 });
+
+function handleLogout() {
+  localStorage.removeItem("user");
+  location.reload();
+}
