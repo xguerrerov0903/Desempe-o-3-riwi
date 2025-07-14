@@ -1,6 +1,5 @@
 // Main script to handle SPA routing and logic.
 
-
 const routes = {
   "/": "/events.html",
   "/login": "/login.html",
@@ -26,35 +25,53 @@ async function navigate(pathname) {
   const user = JSON.parse(localStorage.getItem("user"));
 
   if (pathname === "/" || pathname === "/events") {
-    import("./js/events.js").then(module => {
+    if (!user) {
+      alert("Only users can see this section");
+      return navigate("/login");
+    }
+    import("./js/events.js").then((module) => {
       module.loadEvents();
     });
   }
 
-  
-
   if (pathname === "/login") {
+    if (user) {
+      alert("You already log in");
+      return navigate("/events");
+    }
     import("./js/login.js");
-
   }
 
   if (pathname === "/register") {
-
+    if (user) {
+      alert("You already register");
+      return navigate("/events");
+    }
+    import("./js/register.js");
   }
 
   if (pathname === "/enrollsment") {
-
+    if (user.admin) {
+      alert("Only users can see this section");
+      return navigate("/events");
+    } else if (!user) {
+      alert("Only users can see this section");
+      return navigate("/login");
+    }
+    import("./js/enrollsment.js");
   }
 
   if (pathname === "/events/create") {
-
+    if (!user.admin){
+        alert("Only admins can see this section");
+        return navigate("/events");
+    }
+    import("./js/create.js");
   }
 }
-
 
 window.addEventListener("popstate", () => navigate(location.pathname));
 
 document.addEventListener("DOMContentLoaded", () => {
   navigate(location.pathname);
 });
-
