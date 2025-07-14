@@ -1,0 +1,68 @@
+{
+  "users": [
+    {
+      "id": "2",
+      "name": "Carlos Méndez",
+      "email": "carlos@example.com",
+      "password": "123",
+      "admin": false
+    },
+    {
+      "id": "3",
+      "name": "Ximena",
+      "email": "x@email.com",
+      "password": "123",
+      "admin": true
+    },
+    {
+      "id": "4",
+      "name": "Laura Torres",
+      "email": "laura.torres@gmail.com",
+      "pasword": "123",
+      "admin": false
+    },
+    {
+      "id": "5",
+      "name": "Julián Pérez",
+      "email": "julian.perez@gmail.com",
+      "pasword": "123",
+      "admin": false
+    }
+  ],
+  "enrollments": [
+    {
+      "id": 1,
+      "userId": "2",
+      "eventId": "1"
+    },
+    {
+      "id": 4,
+      "userId": "5",
+      "eventId": "3"
+    }
+  ],
+  "eventss": [
+    {
+      "id": "1",
+      "title": "Halloween Party",
+      "description": "A big event",
+      "capacity": "41",
+      "date": "2025-07-10",
+      "name": "undefined"
+    },
+    {
+      "id": "3",
+      "title": "San Valentin Party",
+      "description": "A big event",
+      "capacity": "771",
+      "date": "2025-07-07"
+    },
+    {
+      "id": "4",
+      "title": "Xmas Part",
+      "description": "A big event",
+      "capacity": "12",
+      "date": "2025-12-12"
+    }
+  ]
+}
