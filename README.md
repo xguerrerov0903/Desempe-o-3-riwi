@@ -4,7 +4,7 @@ This project is a **Single Page Application (SPA)** developed for the administra
 
 ## 📁 Project Structure
 
-`
+```
 Performance test 3/
 ├──css/   # CSS Styles
 ├──js/   # JS modules organized by functionality
@@ -16,7 +16,7 @@ Performance test 3/
 ├──server.js   # Backend server with JSON Server and CORS
 ├──package.json   # Project configuration and dependencies
 └──. gitignore   # Files ignored by Git
-`
+```
 
 ## 🚀 Features
 
