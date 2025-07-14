@@ -32,7 +32,7 @@ function printMyEvents(events, enrolls) {
           <td>${event.description}</td>
           <td>${event.capacity}</td>
           <td>${event.date}</td>
-          <td><button type="button" value="delete">Eliminar</button></td>
+          <td><button type="button" value="delete">Delet</button></td>
         </tr>`;
     }
   });
@@ -54,7 +54,7 @@ function setupUserTableListener() {
     const id = tr.id;
     const action = event.target.value;
     if (action === "delete") {
-      await deletes(urlEnroll, id); // ❗ Cuidado: debes borrar en `enrollments`, no en `events`
+      await deletes(urlEnroll, id); 
       const updatedevents = await get(url);
       const updatedEnrolls = await get(urlEnroll);
       printMyEvents(updatedevents, updatedEnrolls);

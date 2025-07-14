@@ -42,6 +42,11 @@ async function navigate(pathname) {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
+  import("./js/login.js").then((module) => {
+    module.controlPermissions(user);
+    module.showUserName(user);
+  });
+
   if (pathname === "/" || pathname === "/events") {
     if (!user) {
       alert("Only users can see this section");
@@ -58,7 +63,8 @@ async function navigate(pathname) {
         alert("You already log in");
         return navigate("/events");
       }
-      import("./js/login.js").then((module) => module.initLogin());
+      import("./js/login.js").then((module) => 
+        module.initLogin());
     }
   
 
@@ -67,7 +73,7 @@ async function navigate(pathname) {
       alert("You already register");
       return navigate("/events");
     }
-    import("./js/register.js").then((module) => module.initRegister());
+    import("./js/create.js");
   }
 
   if (pathname === "/enrollsment") {
@@ -78,7 +84,8 @@ async function navigate(pathname) {
       alert("Only users can see this section");
       return navigate("/login");
     }
-    import("./js/enrollsment.js");
+    import("./js/enrollsment.js").then((module) => 
+      module.loadMyEvents());
   }
 
   if (pathname === "/events/create") {

@@ -26,7 +26,7 @@ function printEvents(eventss) {
               currentUser && currentUser.admin
                 ? `<button type="button" value="edit">Edit</button>
                     <button type="button" value="delete">Delet</button>`
-                : `<button type="button" value="enroll">Enroll</button>`
+                : event.capacity >0 ?`<button type="button" value="enroll">Enroll</button>`: `Sould Out` 
             }
             </td>
         </tr>`;
@@ -51,7 +51,7 @@ function setupUserTableListener() {
       const id = tr.id;
       const action = event.target.value;
       if (action === "delete") {
-        // 1. Elimina inscripciones del curso
+        // 1. Elimina inscripciones del evento
         const enrollments = await get("http://localhost:3000/enrollments");
         const relatedEnrollments = enrollments.filter(
           (enroll) => enroll.eventId == id

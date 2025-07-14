@@ -6,10 +6,6 @@ export function initLogin() {
   const containerDiv = document.querySelector(".container");
   const storedUser = JSON.parse(localStorage.getItem("user"));
 
-  if (storedUser) {
-    showUserName(storedUser);
-    controlPermissions(storedUser);
-  }
 
   const loginForm = document.getElementById("loginForm");
   if (loginForm) {
@@ -34,12 +30,10 @@ async function handleLogin(e) {
 
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
-      showUserName(user);
-      controlPermissions(user);
-      location.reload();
+      window.location.href = "/events";
 
     } else {
-      document.getElementById("loginError").textContent = "Credenciales incorrectas";
+      document.getElementById("loginError").textContent = "Wrong email or password";
       document.getElementById("loginError").style.display = "block";
     }
   } catch (err) {
@@ -48,30 +42,29 @@ async function handleLogin(e) {
     document.getElementById("loginError").style.display = "block";
   }
 }
-function showUserName(user) {
+export function showUserName(user) {
+  if (!user) return; 
   const userInfo = document.querySelector(".userName");
   if (userInfo) userInfo.textContent = user.name;
 }
 
-function controlPermissions(user) {
+export function controlPermissions(user) {
   const eventCreate = document.querySelector('a[href="/events/create"]');
   const loginDisplay = document.querySelector('a[href="/login"]');
-  const registreDisplay = document.querySelector('a[href="/registre"]');
+  const registreDisplay = document.querySelector('a[href="/register"]');
   const enrollDisplay = document.querySelector('a[href="/enrollsment"]');
   const eventDisplay = document.querySelector('a[href="/events"]');
-  const logOutDisplay = document.getElementById("logoutBtn");
-  if(user && loginDisplay && registreDisplay){
-    loginDisplay.style.display = "none";
-    registreDisplay.style.display = "none";
-  } else if (!user.admin && eventCreate) {
-    eventCreate.style.display = "none";
-  } else if (user.admin && enrollDisplay) {
-    enrollDisplay.style.display = "none";
-  } else if (!user){
-    enrollDisplay.style.display = "none";
-    eventDisplay.style.display = "none";
-    logOutDisplay.style.display = "none";
+  const logOutDisplay = document.getElementById("logoutButton");
+
+  if (user) {
+    if (loginDisplay) loginDisplay.style.display = "none";
+    if (registreDisplay) registreDisplay.style.display = "none";
+    if (!user.admin && eventCreate) eventCreate.style.display = "none";
+    if (user.admin && enrollDisplay) enrollDisplay.style.display = "none";
+  } else {
+    if (enrollDisplay) enrollDisplay.style.display = "none";
+    if (eventDisplay) eventDisplay.style.display = "none";
+    if (logOutDisplay) logOutDisplay.style.display = "none";
   }
 }
-
 

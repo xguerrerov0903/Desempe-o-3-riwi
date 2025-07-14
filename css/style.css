@@ -1,17 +1,22 @@
 #buttonEdit {
-    display: block;
-    width: 115px;
-    height: 25px;
-    background: #4E9CAF;
-    padding: 10px;
-    text-align: right;
-    border-radius: 5px;
-    color: white;
-    font-weight: bold;
-    line-height: 25px;
+  display: inline-block;
+  min-width: 115px;
+  padding: 0.5rem 1rem;
+  background: #4E9CAF;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 0.2rem 0;
 }
 
-
+#buttonEdit:hover {
+  background: #357a8c;
+}
 /*EXTRA*/
 
 
@@ -189,5 +194,102 @@ td:last-child {
   }
   table, th, td {
     font-size: 0.8rem;
+  }
+}
+
+/* Sidebar improvements */
+.sidebar {
+  background-color: #232946;
+  color: #fff;
+  width: 220px;
+  padding: 2rem 1rem;
+  box-shadow: 2px 0 12px rgba(0,0,0,0.04);
+}
+
+.userName {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  letter-spacing: 1px;
+  color: #eebbc3;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+/* Sidebar nav links */
+.sidebar nav ul li a {
+  color: #ccc;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  display: block;
+}
+
+.sidebar nav ul li a.active,
+.sidebar nav ul li a:hover {
+  background: #eebbc3;
+  color: #232946;
+  font-weight: 600;
+}
+
+/* Logout button styled as menu item */
+#logoutButton {
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.7rem 1rem;
+  background: #eebbc3;
+  color: #232946;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  display: block;
+  text-align: left;
+}
+
+#logoutButton:hover {
+  background: #f6f8fa;
+  color: #232946;
+  border: 1px solid #eebbc3;
+}
+
+/* Main content improvements */
+.main-content {
+  flex: 1;
+  padding: 2rem;
+  background-color: #fff;
+  min-height: 100vh;
+  box-shadow: 0 0 12px rgba(0,0,0,0.03);
+  border-radius: 0.5rem;
+}
+
+/* Responsive tweaks (keep your existing ones) */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: none;
+  }
+  .sidebar nav ul {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .main-content {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-content {
+    padding: 0.5rem;
   }
 }
