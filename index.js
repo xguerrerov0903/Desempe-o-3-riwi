@@ -43,6 +43,7 @@ async function navigate(pathname) {
     module.showUserName(user);
   });
 
+  // The views are protected by the user permissions
   if (pathname === "/" || pathname === "/events") {
     if (!user) {
       alert("Only users can see this section");
