@@ -131,7 +131,17 @@ async function addEvent(id, currentUser) {
         userId: currentUserId,
         eventId: id,
       };
+      const existingevent = await get_id(url, id);
+      const eventUpdate = {
+          ...existingevent,
+          capacity: existingevent.capacity -1
+      }
       await post("http://localhost:3000/enrollments", enroll);
+      await update(url,id,eventUpdate)
+      const updateEvent = await get(url);
+    printEvents(updateEvent);
+
+
       alert("Event add");
     } catch (error) {
       console.error("Error with the enroll of the event:", error);

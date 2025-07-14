@@ -34,6 +34,11 @@
       "id": "4",
       "userId": "5",
       "eventId": "3"
+    },
+    {
+      "id": "e340",
+      "userId": "2",
+      "eventId": "4"
     }
   ],
   "eventss": [
@@ -56,7 +61,7 @@
       "id": "4",
       "title": "Xmas Part",
       "description": "A big event",
-      "capacity": "12",
+      "capacity": 10,
       "date": "2025-12-12"
     }
   ]
