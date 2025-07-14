@@ -11,10 +11,11 @@ Performance test 3/
 ├──public/   # Static HTML pages
   └── event/ # Creation events page
 ├──index.html   # Home page
-├──script.js   # SPA main script
+├──index.js   # SPA main script
 ├──db.json   # Fake database for JSON Server
 ├──server.js   # Backend server with JSON Server and CORS
 ├──package.json   # Project configuration and dependencies
+├──cors.js  
 └──. gitignore   # Files ignored by Git
 ```
 
@@ -22,7 +23,7 @@ Performance test 3/
 
 - Panel-type administration interface.
 - Management of events.
-- Enrollments of events fro users.
+- Enrollments of events for users.
 - SPA with routes managed from the frontend.
 - Simulated authentication.
 - Simulated backend with 'json-server'.
