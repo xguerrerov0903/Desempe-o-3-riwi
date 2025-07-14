@@ -6,30 +6,33 @@ This project is a **Single Page Application (SPA)** developed for the administra
 
 `
 Performance test 3/
-css/   # CSS Styles
-js/   # JS modules organized by functionality
-public/   # Static HTML pages
-index.html   # Home page
-script.js   # SPA main script
-db.json   # Fake database for JSON Server
-server.js   # Backend server with JSON Server and CORS
-package.json   # Project configuration and dependencies
-. gitignore   # Files ignored by Git
+├──css/   # CSS Styles
+├──js/   # JS modules organized by functionality
+├──public/   # Static HTML pages
+  └── event/ # Creation events page
+├──index.html   # Home page
+├──script.js   # SPA main script
+├──db.json   # Fake database for JSON Server
+├──server.js   # Backend server with JSON Server and CORS
+├──package.json   # Project configuration and dependencies
+└──. gitignore   # Files ignored by Git
 `
 
 ## 🚀 Features
 
 - Panel-type administration interface.
-- Management of users and courses.
--SPA with routes managed from the frontend.
+- Management of events.
+- Enrollments of events fro users.
+- SPA with routes managed from the frontend.
 - Simulated authentication.
 - Simulated backend with 'json-server'.
-- Modern style with lateral dashboard structure.
+- Modern style with lateral dashboard structure and responsive.
 
 ## 🛠️ Installation
 
 1. Clone the repository or unzip this file.
-2. Install dependencies:
+   
+3. Install dependencies:
 
 `bash
 npm install
@@ -38,7 +41,7 @@ npm install
 3. Run the backend server:
 
 `bash
-node server.js
+npx json-server --watch db.json --port 3000
 `
 
 4. On another terminal, start the development environment:
@@ -57,10 +60,23 @@ npm run dev
 
 ## 📄 Notes
 
-- The 'db.json' file contains simulated data (users, courses, etc.).
+- The 'db.json' file contains simulated data (users, events and enrolls.).
 - The login is based on simulated validation from the frontend.
 - Navigation is controlled by JavaScript, without reloading the page.
 
-## 📌 Author and Repository
+## 🧪 Test
 
-Original repository: [https://github.com/Crismiau/Reto-SPA](https://github.com/Crismiau/Reto-SPA)
+### Admin user
+- Email: x@email.com
+- Password: 123
+
+### Normal user
+- Email: p@email.com
+- Password: 123
+
+## 📌 Author 
+
+Name: Ximena Guerrero Villa
+Clan: Lovelace
+Email: xguerrerov0903@gmail.com
+ID: 1000896809
