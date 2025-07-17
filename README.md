@@ -35,19 +35,19 @@ Performance test 3/
    
 3. Install dependencies:
 
-`bash
+`
 npm install
 `
 
 3. Run the backend server:
 
-`bash
+`
 npx json-server --watch db.json --port 3000
 `
 
 4. On another terminal, start the development environment:
 
-`bash
+`
 npm run dev
 `
 
